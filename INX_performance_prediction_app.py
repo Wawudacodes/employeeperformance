@@ -3,7 +3,7 @@ import joblib
 import streamlit as st
 
 # Loading the trained model using joblib
-loaded_model = joblib.load('C:/Users/User/Documents/IABAC/rf_trained_model.joblib')
+loaded_model = joblib.load('./rf_trained_model.joblib')
 
 
 # Prediction function
