@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 altair==5.3.0
 anyio==4.4.0
 argon2-cffi==23.1.0
@@ -134,3 +135,6 @@ websocket-client==1.8.0
 Werkzeug==3.0.3
 widgetsnbextension==4.0.11
 zipp==3.19.2
+=======
+ 
+>>>>>>> b9b58739dbaacae181be54f0fed619e8f280310b
