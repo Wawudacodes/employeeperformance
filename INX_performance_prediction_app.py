@@ -1,6 +1,8 @@
 import numpy as np
 import joblib
 import streamlit as st
+import streamlit.components.v1 as components
+
 
 # Loading the trained model using joblib
 try:
@@ -10,10 +12,8 @@ except Exception as e:
     print(f"Error loading the model: {e}")
 
 # Prediction function
-def performancerating_prediction(input_data, model):
-    if model is None:
-        return "Model not loded correctly"
-
+def performancerating_prediction(input_data):
+    
     # Converting input data to a numpy array
     input_data_as_numpy_array = np.array(input_data, dtype=float)
 
