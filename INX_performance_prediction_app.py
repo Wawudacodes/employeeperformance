@@ -17,13 +17,11 @@ def performancerating_prediction(input_data, model):
 
     # Reshaping the data for prediction
     input_data_reshaped = input_data_as_numpy_array.reshape(1, -1)
-
-    # Making a prediction
-try:
-    prediction = loaded_model.predict(input_data_reshaped)
-    st.write(f"Prediction: {prediction}")
-except Exception as e:
-    st.error(f"Error during prediction: {e}")
+    try:
+        prediction = loaded_model.predict(input_data_reshaped)
+        st.write(f"Prediction: {prediction}")
+    except Exception as e:
+        st.error(f"Error during prediction: {e}")
 
     # Mapping the numeric prediction to performanceratings
     performance_mapping = {1: 'Low', 2: 'Good', 3: 'Excellent', 4: 'Outstanding'}
