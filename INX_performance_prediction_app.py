@@ -4,7 +4,7 @@ import streamlit as st
 
 # Loading the trained model using joblib
 try:
-    loaded_model = joblib.load('./rf_trained_model.joblib')
+    loaded_model = joblib.load('./rf_trained_rfmodel.joblib')
 except Exception as e:
     loaded_model = None
     print(f"Error loading the model: {e}")
