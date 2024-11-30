@@ -12,7 +12,7 @@ except Exception as e:
     print(f"Error loading the model: {e}")
 
 # Prediction function
-def performancerating_prediction(input_data):
+def performancerating_prediction(input_data, model):
     
     # Converting input data to a numpy array
     input_data_as_numpy_array = np.array(input_data, dtype=float)
@@ -21,7 +21,7 @@ def performancerating_prediction(input_data):
     input_data_reshaped = input_data_as_numpy_array.reshape(1, -1)
 
     # Making a prediction
-    prediction = loaded_model.predict(input_data_reshaped)
+    prediction = model.predict(input_data_reshaped)
 
     # Mapping the numeric prediction to performanceratings
     performance_mapping = {1: 'Low', 2: 'Good', 3: 'Excellent', 4: 'Outstanding'}
