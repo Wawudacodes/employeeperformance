@@ -1,34 +1,47 @@
 import numpy as np
 import joblib
 import streamlit as st
-import streamlit.components.v1 as components
+import logging
 
-
+logging.basicConfig(level=logging.INFO)
 # Loading the trained model using joblib
 try:
     loaded_model = joblib.load('./rf_trained_rfmodel.joblib')
 except Exception as e:
     loaded_model = None
-    print(f"Error loading the model: {e}")
+    logging.error(f"Error loading the model: {e}")
 
 # Prediction function
 def performancerating_prediction(input_data, model):
-    
-    # Converting input data to a numpy array
-    input_data_as_numpy_array = np.array(input_data, dtype=float)
+     if model is None:
+        logging.error("Model is None. Cannot make prediction.")
+        return "Error: Model not loaded"
+     
+     try:
+         # Converting input data to a numpy array
+         input_data_as_numpy_array = np.array(input_data, dtype=float)
 
-    # Reshaping the data for prediction
-    input_data_reshaped = input_data_as_numpy_array.reshape(1, -1)
+         # Reshaping the data for prediction
+         input_data_reshaped = input_data_as_numpy_array.reshape(1, -1)
 
-    # Making a prediction
-    prediction = model.predict(input_data_reshaped)
+         # Making a prediction
+         prediction = model.predict(input_data_reshaped)
 
-    # Mapping the numeric prediction to performanceratings
-    performance_mapping = {1: 'Low', 2: 'Good', 3: 'Excellent', 4: 'Outstanding'}
-    return performance_mapping.get(prediction[0], "Unknown Rating")
+         # Mapping the numeric prediction to performanceratings
+         performance_mapping = {1: 'Low', 2: 'Good', 3: 'Excellent', 4: 'Outstanding'}
+         return performance_mapping.get(prediction[0], "Unknown Rating")
+     
+     except Exception as e:
+        logging.error(f"Error during prediction: {e}")
+        return f"Error during prediction: {str(e)}"
 
 # Main function for Streamlit app
 def main():
+
+    if loaded_model is None:
+        st.error("Model failed to load. Please check the logs for more information.")
+        return
+
     st.title('INX Employee Performance Prediction Web App')
 
     # Collecting input data
@@ -77,7 +90,10 @@ def main():
     # Prediction
     if st.button('Predict Performance Rating'):
         result = performancerating_prediction(input_data, loaded_model)
-        st.success(result)
+        if result.startswith("Error"):
+            st.error(result)
+        else:
+            st.success(result)
 
 # Running the app with the main function
 if __name__ == '__main__':
