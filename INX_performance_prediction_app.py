@@ -11,8 +11,6 @@ except Exception as e:
 
 # Prediction function
 def performancerating_prediction(input_data, model):
-    if model is None:
-        return "Model not loded correctly"
 
     # Converting input data to a numpy array
     input_data_as_numpy_array = np.array(input_data, dtype=float)
