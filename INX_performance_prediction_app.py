@@ -19,7 +19,7 @@ def performancerating_prediction(input_data, model):
     input_data_reshaped = input_data_as_numpy_array.reshape(1, -1)
 
     # Making a prediction
-    try:
+try:
     prediction = loaded_model.predict(input_data_reshaped)
     st.write(f"Prediction: {prediction}")
 except Exception as e:
