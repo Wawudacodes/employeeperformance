@@ -1,28 +1,27 @@
 import numpy as np
 import joblib
 import streamlit as st
+import streamlit.components.v1 as components
+
 
 # Loading the trained model using joblib
 try:
-    model_path = 'C:/Users/User/Documents/IABAC/rf_trained_rfmodel.joblib'
-    loaded_model = joblib.load(model_path)
+    loaded_model = joblib.load('./rf_trained_rfmodel.joblib')
 except Exception as e:
     loaded_model = None
     print(f"Error loading the model: {e}")
 
 # Prediction function
-def performancerating_prediction(input_data, model):
-
+def performancerating_prediction(input_data):
+    
     # Converting input data to a numpy array
     input_data_as_numpy_array = np.array(input_data, dtype=float)
 
     # Reshaping the data for prediction
     input_data_reshaped = input_data_as_numpy_array.reshape(1, -1)
-    try:
-        prediction = loaded_model.predict(input_data_reshaped)
-        st.write(f"Prediction: {prediction}")
-    except Exception as e:
-        st.error(f"Error during prediction: {e}")
+
+    # Making a prediction
+    prediction = loaded_model.predict(input_data_reshaped)
 
     # Mapping the numeric prediction to performanceratings
     performance_mapping = {1: 'Low', 2: 'Good', 3: 'Excellent', 4: 'Outstanding'}
@@ -83,3 +82,4 @@ def main():
 # Running the app with the main function
 if __name__ == '__main__':
     main()
+
