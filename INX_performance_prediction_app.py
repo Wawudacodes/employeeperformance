@@ -6,10 +6,14 @@ import streamlit as st
 try:
     loaded_model = joblib.load('./rf_trained_model.joblib')
 except Exception as e:
+    loaded_model = None
     print(f"Error loading the model: {e}")
 
 # Prediction function
-def performancerating_prediction(input_data, loaded_model):
+def performancerating_prediction(input_data, model):
+    if model is None:
+        return "Model not loded correctly"
+
     # Converting input data to a numpy array
     input_data_as_numpy_array = np.array(input_data, dtype=float)
 
