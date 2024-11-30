@@ -3,8 +3,10 @@ import joblib
 import streamlit as st
 
 # Loading the trained model using joblib
-loaded_model = joblib.load('./rf_trained_model.joblib')
-
+try:
+    loaded_model = joblib.load('./rf_trained_model.joblib')
+except Exception as e:
+    print(f"Error loading the model: {e}")
 
 # Prediction function
 def performancerating_prediction(input_data):
