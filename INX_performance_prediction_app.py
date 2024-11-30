@@ -9,7 +9,7 @@ except Exception as e:
     print(f"Error loading the model: {e}")
 
 # Prediction function
-def performancerating_prediction(input_data):
+def performancerating_prediction(input_data, loaded_model):
     # Converting input data to a numpy array
     input_data_as_numpy_array = np.array(input_data, dtype=float)
 
@@ -72,7 +72,7 @@ def main():
 
     # Prediction
     if st.button('Predict Performance Rating'):
-        result = performancerating_prediction(input_data)
+        result = performancerating_prediction(input_data, loaded_model)
         st.success(result)
 
 # Running the app with the main function
